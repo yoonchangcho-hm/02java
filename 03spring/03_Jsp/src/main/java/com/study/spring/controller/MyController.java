@@ -3,6 +3,7 @@ package com.study.spring.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.study.spring.Application;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,6 +47,20 @@ public class MyController {
 			
 			
 			return "index";
+		}
+		
+		// http://localhost:8080/index?name=이순신&age=30
+		@RequestMapping("/view1")
+		public String view1 (
+				@RequestParam("name") String name,
+				@RequestParam("age") String age,
+				Model model
+				) {
+			
+			model.addAttribute("name", name);
+			model.addAttribute("age", age);
+
+			return "view1";
 		}
 		
 		
