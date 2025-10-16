@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>안녕하세요</h1>
-	
+<%-- <% out.println("안녕하세요"); %> --%>
+
+${name}님, 안녕하세요. 당신의 나이는 ${age } 살입니다.
+
 </body>
 </html>
