@@ -4,7 +4,6 @@ public class Member {
 	private String name;
 	private String age;
 	private String addr;
-	
 	public String getName() {
 		return name;
 	}
@@ -17,11 +16,11 @@ public class Member {
 	public void setAge(String age) {
 		this.age = age;
 	}
-	public void getAdr(String addr) {
-		this.age = age;
+	public String getAddr() {
+		return addr;
 	}
-	public void setAge(String ) {
-		this.age = age;
+	public void setAddr(String addr ) {
+		this.addr = addr;
 	}
 
 }

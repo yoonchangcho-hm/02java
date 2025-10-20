@@ -8,13 +8,10 @@
 </head>
 <body>
 
-<div>이름 : ${member.name }</div>
-<div>나이 : ${member.age }</div>
-<div>주소 : ${member.addr }</div>
+<div>이름 : ${member.name}</div>
+<div>나이 : ${member.age}</div>
+<div>주소 : ${member.addr}</div>
 
 <a href="form">이전페이지</a>
-${member.name} / ${member.age}
-${member.addr } 
-
 </body>
 </html>
