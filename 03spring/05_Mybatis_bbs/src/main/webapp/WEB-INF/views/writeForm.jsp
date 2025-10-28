@@ -4,22 +4,22 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
 <div class="container mt-5">
 
-	<div class="d-flex justify-content-between">
+	<div class="container mt-5">
 		<h3>글작성하기</h3>
 	</div>
 
 	<div class="my-3">
 		<form action="write" method="get" onsubmit="return validForm()">
 		<div class="my-3">
-			<label for="name" class="form-Label">작성자</label> 
+			<label for="writer" class="form-control">작성자</label> 
 			<input type="text" name="writer" id="name" class="form-control" required/>
 		</div>
 		<div class="my-3">
-			<label for="title" class="form-Label">작성자</label> 
+			<label for="title" class="form-control">제목</label> 
 			<input type="text" name="title" id="title" class="form-control" required />
 		</div>
 		<div class="my-3">
-			<label for="content" class="form-Label">작성자</label>
+			<label for="content" class="form-Label">내용</label>
 			<textarea rows="10" class="form-control" name="content" required></textarea>
 		</div>
 

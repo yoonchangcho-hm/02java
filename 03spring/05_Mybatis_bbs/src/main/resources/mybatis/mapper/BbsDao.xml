@@ -5,7 +5,37 @@
 
 <mapper namespace="com.study.spring.bbs.IBbsDao">
 	<select id="listDao" resultType="com.study.spring.bbs.BbsDto">
-		select * from simple_bbs order by id desc
+		SELECT *
+		FROM simple_bbs
+		ORDER BY
+		id DESC
 	</select>
 
+	<select id="countDao" resultType="_int">
+		SELECT COUNT(*) FROM simple_bbs
+
+	</select>
+
+	<select id="viewDao" parameterType="String"
+		resultType="com.study.spring.bbs.BbsDto">
+		SELECT *
+		FROM
+		simple_bbs
+		WHERE id = #{id}
+
+	</select>
+
+	<insert id="writeDao">
+		INSERT INTO simple_bbs (writer, title, content)
+		VALUES (#{writer}, #{title}, #{content})
+	</insert>
+
+	<select id="countDao" resultType="_int">
+		SELECT COUNT(*) FROM simple_bbs
+	</select>
+
+	<delete id="deleteDao" parameterType="String">
+		DELETE FROM simple_bbs
+		WHERE id = #{id}
+	</delete>
 </mapper>

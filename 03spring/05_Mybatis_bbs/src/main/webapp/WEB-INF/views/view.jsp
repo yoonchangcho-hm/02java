@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="include/header.jsp"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
+
 <div class="container mt-5">
 
 	<div class="d-flex justify-content-between">
@@ -11,8 +12,9 @@
 	<div class="my-3">
 		<h3 class="mb-3">${dataView.title}</h3>
 		<h4 class="text-secondary">${dataView.writer}</h4>
+		<p class="text-muted">작성일: ${dataView.created_at}</p>
 		<hr />
-		<p class="my-5">${dataView.content}</p>
+		<p class="my-5" style="white-space: pre-wrap;">${dataView.content}</p>
 
 		<div class="d-flex justify-content-end">
 			<a href="./list" class="btn btn-primary btn-sm">글목록</a>
