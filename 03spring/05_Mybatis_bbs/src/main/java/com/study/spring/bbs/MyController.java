@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,61 +11,47 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class MyController {
 
-	@Autowired
-	IBbsDao dao;
+    @Autowired
+    BbsService service;
 
-	@RequestMapping("/")
-//	@ResponseBody
-	public String root() {
-		return "redirect:list";
-	}
+    @RequestMapping("/")
+    @ResponseBody
+    public String root() {
+        return "test";
+    }
 
-	@RequestMapping("/list")
-	public String list(Model model) {
-		model.addAttribute("lists", dao.listDao());
-		model.addAttribute("count", dao.countDao());
-		return "list"; // jsp . model value 전송
-	}
+    @RequestMapping("/list")
+    public String list(Model model) {
+        model.addAttribute("lists", service.getList());
+        model.addAttribute("count", service.count());
+        return "list"; // jsp / model value 전송
+    }
 
-	@RequestMapping("/view")
-//	public String view(HttpServletRequest req, Model model) {
-//		String id = req.getParameter("id");
-//		model.addAttribute("dataView", dao.viewDao(id));
-//		return "view";
-//	}
-	public String view(@RequestParam("id") String id, Model model) {
-		model.addAttribute("dataView", dao.viewDao(id));
-		return "view";
-	}
-	
-	@RequestMapping("/writeForm")
-	public String writeForm() {
-		return "writeForm"; // writeDorm.jsp <form action="write"></from>
-	}
+    @RequestMapping("/view")  // view?id=1
+    public String view(HttpServletRequest req, Model model) {
+        String sId = req.getParameter("id");
+        model.addAttribute("dataView", service.view(sId));
+        return "view";
+    }
 
-	@RequestMapping("/write")
-//	public String write(HttpServletRequest req) {
-//		String writer = req.getParameter("writer");
-//		String title = req.getParameter("title");
-//		String content = req.getParameter("content");
-	public String write(@RequestParam("writer") String writer, 
-						@RequestParam("title") String title,
-						@RequestParam("content") String content) {
-		
-		dao.writeDao(writer, title, content);
-		return "redirect:list"; // 작성 후 목록으로 이동
-	}
+    @RequestMapping("/writeForm")
+    public String writeForm() {
+        return "writeForm";
+    }
 
-	@RequestMapping("/delete")
-//	public String delete(HttpServletRequest req) {
-//		String id = req.getParameter("id");
-//		dao.deleteDao(id);
-	 public String delete(@RequestParam("id") String id) {
-        dao.deleteDao(id);
+    @RequestMapping("/write")
+    public String write(HttpServletRequest request, Model model) {
+        service.write(
+            request.getParameter("writer"),
+            request.getParameter("title"),
+            request.getParameter("content")
+        );
+        return "redirect:list";
+    }
 
-		return "redirect:list";
-	}
-	 
-
-
+    @RequestMapping("/delete")
+    public String delete(HttpServletRequest request, Model model) {
+        service.delete(request.getParameter("id"));
+        return "redirect:list";
+    }
 }
