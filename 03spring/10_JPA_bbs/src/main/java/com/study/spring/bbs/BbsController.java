@@ -9,29 +9,21 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
 public class BbsController {
-
+	
 	@Autowired
 	BbsRepository bbsRepository;
-
+	
 	@GetMapping("/")
 	public String root() {
 		return "hi";
 	}
-
+	
 	
 	// 전체데이터
 //	@GetMapping("/api/bbs")
@@ -50,17 +42,18 @@ public class BbsController {
 	
 	@GetMapping("/api/bbs")
 	public Page<Bbs> bbsList(
-			@RequestParam(name="title", defaultValue="") String title,
-			@RequestParam(name="name", defaultValue="") String name,
+			@RequestParam(name="title",defaultValue="") String title,
+			@RequestParam(name="name",defaultValue="") String name,
 			@RequestParam(name="size", defaultValue="5") int size,
-			@RequestParam(name="page", defaultValue="0") int page
+			@RequestParam(name="page",defaultValue="0") int page
 			) {
-		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC,"id"));
+		
+		Pageable pageable = PageRequest.of(page, size,Sort.by(Sort.Direction.DESC,"id"));
 //		return bbsRepository.findAll(pageable);
 //		return bbsRepository.findByTitleContaining(title,pageable);
 		return bbsRepository.findByTitleContainingOrNameContaining(title,name,pageable);
+		
 	}
-	
 	
 	
 	
@@ -80,7 +73,6 @@ public class BbsController {
 			@PathVariable("id") Long id
 			) {
 		return bbsRepository.findById(id);
-	
 	}
 	
 	@PostMapping("/api/bbs")
@@ -89,25 +81,28 @@ public class BbsController {
 			) {
 //		Bbs bbs = new Bbs();
 //		bbs.setName(req.name);
-//		bbs.setName(req.title);
-//		bbs.setName(req.content);
+//		bbs.setTitle(req.title);
+//		bbs.setContent(req.content);
 		
 		Bbs bbs = Bbs.builder()
 				.name(req.getName())
 				.title(req.getTitle())
 				.content(req.getContent())
 				.build();
-				
-				
+			
 		return bbsRepository.save(bbs);
-		
 	}
 	
 	@PutMapping("/api/bbs/{id}")
 	public void bbsUpdate(
-		@PathVariable("id") Long id,
-		@RequestBody BbsDto req
-		) {
+			@PathVariable("id") Long id,
+			@RequestBody BbsDto req
+			){
+		
+		
+//		Bbs bbsEntity = bbsRepository.findById(id).orElseThrow(
+//				()-> new RuntimeException("자료가 없네요")
+//				);
 		
 		Optional<Bbs> view = bbsRepository.findById(id);
 		log.info("정보확인" + view.toString());
@@ -123,13 +118,14 @@ public class BbsController {
 			bbsRepository.save(entity);
 			log.info("수정완료");
 		}
+		
 	}
+	
 	
 	@DeleteMapping("/api/bbs/{id}")
 	public ResponseEntity<?> bbsDelete(
 			@PathVariable("id") Long id
-			) {
-		
+			){
 		boolean bbs = bbsRepository.existsById(id);
 		if(!bbs) {
 			return ResponseEntity.notFound().build();
@@ -142,9 +138,12 @@ public class BbsController {
 	
 	
 	
-//	public void bbsList()
-//	public void bbsView()
-//	public void bbsCreate()
-//	public void bbsUpdate()
-//	public void bbsDelete()
+//	public void bbsList(){}
+//	public void bbsView(){}
+//	public void bbsCreate(){}
+//	public void bbsUpdate(){}
+//	public void bbsDelete(){}
+	
+	
+	
 }

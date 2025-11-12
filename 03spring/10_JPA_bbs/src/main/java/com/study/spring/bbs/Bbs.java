@@ -24,14 +24,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "bbs_table")
+@Table(name="bbs_table")
 public class Bbs {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(length = 100)
+	
+	@Column(length=100)
 	private String name;
 	private String title;
 	private String content;
@@ -48,4 +48,5 @@ public class Bbs {
 	public void onUpdate() {
 		this.updatedAt = LocalDateTime.now();
 	}
+	
 }
