@@ -25,6 +25,7 @@ public class BbsController {
 	}
 	
 	
+	
 	// 전체데이터
 //	@GetMapping("/api/bbs")
 //	public List<Bbs> bbsList(){
@@ -34,11 +35,13 @@ public class BbsController {
 	
 	
 	// 페이지네이션
-	// http://localhost:8080/api/bbs?size=5&page=0&title=test
-//	@GetMapping("/api/bbs")
-//	public void bbsList() {
-//		
-//	}
+	//http://localhost:8080/api/bbs?size=5&page=0&title=test
+
+	//	@GetMapping("/api/bbs")
+	//	public void bbsList() {
+	//		
+	//	}
+
 	
 	@GetMapping("/api/bbs")
 	public Page<Bbs> bbsList(
@@ -59,7 +62,13 @@ public class BbsController {
 	
 	
 	
-
+	
+	
+	
+	
+	
+	
+	
 //	@GetMapping("/api/bbs/{id}")
 //	public Optional<Bbs> bbsView(
 //			@PathVariable("id") Long id
@@ -147,3 +156,5 @@ public class BbsController {
 	
 	
 }
+	
+	
