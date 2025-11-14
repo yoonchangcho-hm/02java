@@ -11,6 +11,5 @@ public class TestDto {
 	public String title;
 	public String content;
 	public String name;
-	
 	public MultipartFile fileUpload;
 }
