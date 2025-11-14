@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 
-//c s   s r
+//con <- serv   serv <- repos
 
 @Service
 @Slf4j
@@ -79,7 +79,6 @@ public class FileService {
 		fileRepository.save (createData);
 	
 	}
-
 
 
 }
