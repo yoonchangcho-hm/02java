@@ -19,7 +19,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString  
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,15 +36,7 @@ public class Bbs {
 	private String title;
 	private String content;
 	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
-	
-	@PrePersist
-	public void onCreate() {
-		this.createdAt = LocalDateTime.now();
-		this.updatedAt = LocalDateTime.now();
-	}
-	
-	@PreUpdate
+	private LocalDateTime updatedAt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 	public void onUpdate() {
 		this.updatedAt = LocalDateTime.now();
 	}
