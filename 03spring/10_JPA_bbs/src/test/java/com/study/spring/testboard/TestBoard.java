@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.study.spring.board.entity.Board;
+import com.study.spring.board.entity.Image;
 import com.study.spring.board.repository.BoardRepository;
 import com.study.spring.board.repository.ImageRepository;
 import com.study.spring.member.entitiy.Member;
@@ -17,36 +18,82 @@ import lombok.extern.slf4j.Slf4j;
 public class TestBoard {
 
 	@Autowired
-	MemberRepository memberRepository;	
-	
+	MemberRepository memberRepository;
+
 	@Autowired
 	BoardRepository boardRepository;
-	
+
 	@Autowired
 	ImageRepository imageRepository;
 
+//	@Test  //ntt로받은것을 -> dto로 바꿔줄예정
+//	public void insertBoard() {
+//	    Member member = memberRepository.findById(1L)
+//	    		 .orElseThrow(()-> new IllegalArgumentException("멤버가 없어요"));
+//	    
+//	  
+////	    Board board = new Board();
+////	    	board.setTitle("안녕하세요");
+////	    	board.setContent("만나서반값습니다.");
+////	    	board.setName("조윤창");	    
+////	    	board.setMember(member);
+//	    
+//	    	Board board = Board.builder()
+//	    			.title("안녕")
+//	    			.content("내용")
+//	    			.name("이순신")
+//	    			.member(member)
+//	    			.build();
+//	    	
+//	    	
+//	    	Board saveBoard = boardRepository.save(board);
+//	    	log.info("글작성" + saveBoard);
+//	    	log.info("아이디" + member);	
+//	}
+
+//	@Test
+//	public void insertImage() {
+//		Board board = boardRepository.findById(5L)
+//				.orElseThrow(() -> new IllegalArgumentException("데이터가 없습니다."));
+//		
+//		Image img1 = Image.builder()
+//				.originalFileName("cat2.jpg")
+//				.fileName("cat2_.jpg")
+//				.board(board)
+//				.build();
+//		
+//		Image saveImage = imageRepository.save(img1);
+//		
+//		log.info("글보기" + board);
+//		log.info("저장 : " + saveImage);
+//		
+//		log.info("저장된 이미지 id={} ", saveImage.getId());
+//		log.info("저장된 파일명 ={} ", saveImage.getOriginalFileName());
+//		
+//	}
+
 	@Test
-	public void insertBoard() {
-	    Member member = memberRepository.findById(1L)
-	    		 .orElseThrow(()-> new IllegalArgumentException("멤버가 없어요"));
-	    
-	  
-//	    Board board = new Board();
-//	    	board.setTitle("안녕하세요");
-//	    	board.setContent("만나서반값습니다.");
-//	    	board.setName("조윤창");	    
-//	    	board.setMember(member);
-	    
-	    	Board board =Board.builder()
-	    			.title("안녕")
-	    			.content("내용")
-	    			.name("이순신")
-	    			.member(member)
-	    			.build();
-	    	
-	    	
-	    	Board saveBoard = boardRepository.save(board);
-	    	log.info("글작성" + saveBoard);
-	    	log.info("아이디" + member);	
+	public void getImageList() {
+		Board board = boardRepository.findById(5L)
+				.orElseThrow(() -> new IllegalArgumentException("데이터가 없습니다."));
+		
+				System.out.println("=======게시물정보======");
+				System.out.println("id : " +board.getId());
+				System.out.println("title : " +board.getTitle());
+				System.out.println("=========이미지========");
+				
+				board.getImages().forEach(img -> {
+				System.out.println("이미지 id : " + img.getId());
+				System.out.println("파일명 : " + img.getOriginalFileName());
+				System.out.println("순서 : " + img.getImageOrder());
+				System.out.println("=====================");
+					
+				});
+				
+	
+	
+	
 	}
+	
+	
 }
