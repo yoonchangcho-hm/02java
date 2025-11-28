@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +17,7 @@ import com.study.spring.board.entity.Board;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
+
 
 	@Query("""
 			select b
@@ -62,4 +64,32 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 			""")
 	List<BoardListMemberDto> findWithMemberById();
  
+//	@Query("""
+//			select distinct b
+//			from Board b
+//			left join fetch b.images i 
+//			join fetch b.member m
+//			order by b.id desc
+//			""")
+//	List<Board> findWithImage();
+	
+	@EntityGraph(attributePaths = "images")
+	@Query("select b from Board b order by b.id desc")
+	List<Board> findWithImage();
+
+	@Query("""
+			select distinct b
+			from Board b
+			left join fetch b.images
+			join fetch b.member
+			order by b.id desc
+			""")
+	Page<Board> findWithImagePage(Pageable pageable);
+	
+	@Query("""
+			select b from Board b 
+			left join fetch b.images 
+			where b.id = :id
+			""")
+	Board findWithImageById (@Param("id") Long id);
 }

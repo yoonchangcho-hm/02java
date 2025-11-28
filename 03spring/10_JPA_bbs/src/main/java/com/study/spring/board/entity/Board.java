@@ -42,7 +42,7 @@ public class Board {
 	private String content;
 	private LocalDateTime createdAt;
 
-	@ManyToOne //	(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)      //	(fetch=FetchType.LAZY)
 	@JoinColumn(name="member_id")
 	private Member member;
 
